@@ -5,7 +5,7 @@
     {
         public ErrorCode Code { get; } // Código semántico que la UI puede usar para decidir cómo reaccionar.
 
-        public string? Message { get; } // Mensaje técnico pensado para logs. No se muestra directamente al usuario final.
+        public string Message { get; } // Mensaje técnico pensado para logs. No se muestra directamente al usuario final.
 
         public Exception? Exception { get; } // Excepción original que originó el error, si existe.
 
@@ -26,9 +26,9 @@
 
         public static AppError InvalidUrl(string url) => new(ErrorCode.InvalidUrl, $"The URL isn't valid: {url}");
 
-        public static AppError EmptyPlaylist() => new(ErrorCode.EmptyPlaylist, "The playlist no contain any element.");
+        public static AppError EmptyPlaylist() => new(ErrorCode.EmptyPlaylist, "The playlist contains no elements.");
 
-        public static AppError EmptyFolder(string path) => new(ErrorCode.EmptyFolder, $"The folder no contain any file: {path}");
+        public static AppError EmptyFolder(string path) => new(ErrorCode.EmptyFolder, $"The folder contains no files: {path}");
 
         public static AppError NetworkFailure(string message, Exception? ex = null) => new(ErrorCode.NetworkFailure, message, ex);
 
@@ -39,17 +39,17 @@
         public static AppError FileNotFound(string path) => new(ErrorCode.FileNotFound, $"File not found (404): {path}");
 
         public static AppError AccessDenied(string path, Exception? ex = null) => 
-            new(ErrorCode.AccessDenied, $"Permission insuficience for: {path}", ex);
+            new(ErrorCode.AccessDenied, $"Insufficient permissions for: {path}", ex);
 
         public static AppError IoFailure(string message, Exception? ex = null) => new(ErrorCode.IoFailure, message, ex);
 
         public static AppError CollisionDetected(string path) => new(ErrorCode.CollisionDetected, $"Collision of names detected: {path}");
 
-        public static AppError InvalidFileName(string name) => new(ErrorCode.InvalidFileName, $"The name contain invalid characters: {name}");
+        public static AppError InvalidFileName(string name) => new(ErrorCode.InvalidFileName, $"The name contains invalid characters: {name}");
 
         public static AppError CancelledOperation() => new(ErrorCode.CancelledOperation, "Operation was cancelled.");
 
-        public static AppError UnknownError(Exception ex) => new(ErrorCode.UnknownError, "Unknow Error.", ex);
+        public static AppError UnknownError(Exception ex) => new(ErrorCode.UnknownError, "An unexpected error occurred.", ex);
 
 
 
